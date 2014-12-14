@@ -643,7 +643,7 @@ namespace Ionic.Zip
         }
 
 
-#if !NETCF
+#if !(NOINTEROP || NETCF)
         // workitem 8009
         //
         // This method must remain separate.
@@ -662,11 +662,11 @@ namespace Ionic.Zip
         // JIT-compiles this method when UnmanagedCode is disallowed, and thus never
         // generates the JIT-compile time exception.
         //
-#endif
         private static uint _HRForException(System.Exception ex1)
         {
             return unchecked((uint)System.Runtime.InteropServices.Marshal.GetHRForException(ex1));
         }
+#endif
 
     }
 
